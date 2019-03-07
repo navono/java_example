@@ -19,5 +19,4 @@ public class SpringDemoApplication {
         // - 刷新应用上下文，加载所有单例
         // - 触发所有 CommandLineRunner Bean
     }
-
 }
