@@ -30,23 +30,29 @@ public class SecurityUserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        SelectStatementProvider selectStatement = select(UserDynamicSqlSupport.id,UserDynamicSqlSupport.username,UserDynamicSqlSupport.password,UserDynamicSqlSupport.locked)
+        SelectStatementProvider selectStatement = select(UserDynamicSqlSupport.id,UserDynamicSqlSupport.username,
+                UserDynamicSqlSupport.password,UserDynamicSqlSupport.locked)
                 .from(UserDynamicSqlSupport.user)
                 .where(UserDynamicSqlSupport.username,isEqualTo(username))
                 .build().render(RenderingStrategy.MYBATIS3);
 
         Map<String,Object> parameter = new HashMap<>();
         parameter.put("#{username}",username);
+
         User user = userMapper.selectOne(selectStatement);
         if (user == null) throw new UsernameNotFoundException(username);
 
-        SelectStatementProvider manyPermission = select(PermissionDynamicSqlSupport.id,PermissionDynamicSqlSupport.permissionCode,PermissionDynamicSqlSupport.permissionName)
+        SelectStatementProvider manyPermission = select(PermissionDynamicSqlSupport.id,
+                PermissionDynamicSqlSupport.permissionCode,PermissionDynamicSqlSupport.permissionName)
                 .from(PermissionDynamicSqlSupport.permission)
-                .join(RolePermissionDynamicSqlSupport.rolePermission).on(RolePermissionDynamicSqlSupport.permissionId,equalTo(PermissionDynamicSqlSupport.id))
-                .join(UserRoleDynamicSqlSupport.userRole).on(UserRoleDynamicSqlSupport.roleId,equalTo(RolePermissionDynamicSqlSupport.roleId))
+                .join(RolePermissionDynamicSqlSupport.rolePermission)
+                .on(RolePermissionDynamicSqlSupport.permissionId,equalTo(PermissionDynamicSqlSupport.id))
+                .join(UserRoleDynamicSqlSupport.userRole)
+                .on(UserRoleDynamicSqlSupport.roleId,equalTo(RolePermissionDynamicSqlSupport.roleId))
                 .where(UserRoleDynamicSqlSupport.userId,isEqualTo(user.getId()))
                 .build()
                 .render(RenderingStrategy.MYBATIS3);
+
         List<Permission> permissions = permissionMapper.selectMany(manyPermission);
         if (!CollectionUtils.isEmpty(permissions)){
             Set<SimpleGrantedAuthority> sga = new HashSet<>();
