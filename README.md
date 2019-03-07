@@ -1,3 +1,3 @@
-# Learning Java
+# Java Core branch
 
-记录学习 Java 的过程
+记录学习 Java Core 的过程
