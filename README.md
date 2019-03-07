@@ -1,5 +1,7 @@
 ## Spring Security 实现 RBAC 权限管理
 
+最初的源码来自于[此](https://github.com/liubo-tech/spring-security-rbac)。
+
 ### 开发环境部署
 开发环境：
 - JDK 8+
@@ -325,5 +327,4 @@ th 是 Thymeleaf 的基本标签，sec 是 Thymeleaf 对 Spring Security 的扩�
 ```
 只有用户在登录的情况下，才可以显示这个 div 下的内容。
 
-到此，Spring Security 就给大家介绍完了，具体的项目代码参照我的 GitHub 地址：
-[https://github.com/liubo-tech/spring-security-rbac](https://github.com/liubo-tech/spring-security-rbac)
+到此，Spring Security 就给大家介绍完了。
