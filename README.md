@@ -2,7 +2,7 @@
 
 最初的源码来自于[此](https://github.com/liubo-tech/spring-security-rbac)。
 
-### 开发环境部署
+### 零、开发环境部署
 开发环境：
 - JDK 8+
 - Gradle 5+
@@ -31,7 +31,7 @@
     > flush privileges;
 - 退出容器，使用 `Navicat` 登录到 `MySQL` 后，导入 `sql` 文件夹中的数据库文件
 
-### 一简介
+### 一、简介
 
 在企业应用中，认证和授权是非常重要的一部分内容，业界最出名的两个框架就是大名鼎鼎的
 Shiro 和 Spring Security。由于 Spring Boot 非常的流行，选择 Spring Security 做认证和授权的
