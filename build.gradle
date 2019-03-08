@@ -4,7 +4,11 @@ plugins {
 	id 'java'
 }
 
+// 使用 dependency-management 插件，Spring Boot 插件会自动导入相应 boot 版本（在上述的 plugins 已经指定）的 BOM，
+// 这样在 dependencies 引入依赖时，就不需要再次指定版本。此外也可指定其他版本。
 apply plugin: 'io.spring.dependency-management'
+
+
 apply plugin: "com.vanniktech.dependency.graph.generator"
 
 repositories {
